@@ -102,7 +102,25 @@ class Solution:
             return None
         if head.next is None:
             return head
+
         new_head = self.reverseBabyList(head.next)
         head.next.next = head
         head.next = None
         return new_head
+
+
+# NOTE: Recursive two pointers.
+class Solution:
+    def isPalindrome(self, head: ListNode) -> bool:
+        self.front_pointer = head
+
+        def recursively_check(current_node):
+            if current_node is not None:
+                if not recursively_check(current_node.next):
+                    return False
+                if self.front_pointer.val != current_node.val:
+                    return False
+                self.front_pointer = self.front_pointer.next
+            return True
+
+        return recursively_check(head)
